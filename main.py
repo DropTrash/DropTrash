@@ -115,6 +115,8 @@ def scenesMike():
     elif controlMikeScenes == 5:
         window.blit(imgScene05, (0, 0))
 
+
+
 musicHome()  
 images()
 loop = True
@@ -131,5 +133,8 @@ while loop:
     # Comando para chamar a função de cenas do Mike (Lixeiro do jogo)
     elif scenes == "Maike":
         scenesMike()
+    
+    #pos = pygame.mouse.get_pos()
+    #print(pos)
 
     pygame.display.update()

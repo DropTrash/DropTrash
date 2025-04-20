@@ -21,17 +21,24 @@ def musicMike():
 # Função de imagens do jogo
 def images():
     global backGround
-    global imgScene01
-    global imgScene02
-    global imgScene03
-    global imgScene04
-    global imgScene05
-    backGround = pygame.image.load('assets/HomeScreen.png')
-    imgScene01 = pygame.image.load('assets/Scene01.png')
-    imgScene02 = pygame.image.load('assets/Scene02.png')
-    imgScene03 = pygame.image.load('assets/Scene03.png')
-    imgScene04 = pygame.image.load('assets/Scene04.png')
-    imgScene05 = pygame.image.load('assets/Scene05.png')
+    global mikeScene01
+    global mikeScene02
+    global mikeScene03
+    global mikeScene04
+    global mikeScene05
+    global backGroundGaming
+    global papperGarbage
+
+    backGround = pygame.image.load('assets/HomeScene.png')
+    mikeScene01 = pygame.image.load('assets/MikeScene01.png')
+    mikeScene02 = pygame.image.load('assets/MikeScene02.png')
+    mikeScene03 = pygame.image.load('assets/MikeScene03.png')
+    mikeScene04 = pygame.image.load('assets/MikeScene04.png')
+    mikeScene05 = pygame.image.load('assets/MikeScene05.png')
+    backGroundGaming = pygame.image.load('assets/GamingScene.png')
+    papperGarbage = pygame.image.load('assets/PapperGarbage.png')
+    metalGarbage = pygame.image.load('assets/MetalGarbage.png')
+
 
 # Função de transição de imagens (fade)
 def fade_transition(surface, currentImg, nextImg, speed=10):
@@ -55,7 +62,7 @@ def fade_transition(surface, currentImg, nextImg, speed=10):
         pygame.time.delay(5)
 
 # Função para a cena de home
-def sceneHome():
+def homeScene():
     global loop
     global scenes
     global controlMikeScenes
@@ -67,14 +74,14 @@ def sceneHome():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    fade_transition(window, backGround, imgScene01)
+                    fade_transition(window, backGround, mikeScene01)
                     pygame.mixer.music.stop() 
                     musicMike()                
-                    scenes = "Maike"
+                    scenes = "maike"
                     controlMikeScenes = 1
 
 # Função para as cenas de fala do Mike (Lixeiro do jogo)
-def scenesMike():
+def mikeScenes():
     global loop
     global scenes
     global controlMikeScenes
@@ -85,38 +92,55 @@ def scenesMike():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_d:
                 if controlMikeScenes == 1:
-                    fade_transition(window, imgScene01, imgScene02)
+                    fade_transition(window, mikeScene01, mikeScene02)
                     controlMikeScenes = 2
                     musicMike()  
                 elif controlMikeScenes == 2:
-                    fade_transition(window, imgScene02, imgScene03)
+                    fade_transition(window, mikeScene02, mikeScene03)
                     controlMikeScenes = 3
                     musicMike()
                 elif controlMikeScenes == 3:
-                    fade_transition(window, imgScene03, imgScene04)
+                    fade_transition(window, mikeScene03, mikeScene04)
                     controlMikeScenes = 4
                     musicMike()
                 elif controlMikeScenes == 4:
-                    fade_transition(window, imgScene04, imgScene05)
+                    fade_transition(window, mikeScene04, mikeScene05)
                     controlMikeScenes = 5
                     musicMike()
                 elif controlMikeScenes == 5:
+                    fade_transition(window, mikeScene05, backGroundGaming)
+                    garbages()
+                    musicHome()
                     controlMikeScenes = 5
+                    scenes = "gaming"
+                    return
+                    
+
 
     # Controle das cenas do Mike (Lixeiro do jogo)
     if controlMikeScenes == 1:
-        window.blit(imgScene01, (0, 0))
+        window.blit(mikeScene01, (0, 0))
     elif controlMikeScenes == 2:
-        window.blit(imgScene02, (0, 0))
+        window.blit(mikeScene02, (0, 0))
     elif controlMikeScenes == 3:
-        window.blit(imgScene03, (0, 0))
+        window.blit(mikeScene03, (0, 0))
     elif controlMikeScenes == 4:
-        window.blit(imgScene04, (0, 0))
+        window.blit(mikeScene04, (0, 0))
     elif controlMikeScenes == 5:
-        window.blit(imgScene05, (0, 0))
+        window.blit(mikeScene05, (0, 0))
+
+# Função placeholder para a cena do jogo (você pode completar depois)
+def gammingScene():
+    global loop
+    global scenes
+    window.blit(backGroundGaming, (0, 0))
+
+def garbages():
+    window.blit(papperGarbage, (500, 500))
+    
 
 
-
+# Inicialização
 musicHome()  
 images()
 loop = True
@@ -128,13 +152,22 @@ while loop:
 
     # Comando para chamar a função de cena home do jogo
     if scenes == "home":
-        sceneHome()
+        homeScene()
         
     # Comando para chamar a função de cenas do Mike (Lixeiro do jogo)
-    elif scenes == "Maike":
-        scenesMike()
+    elif scenes == "maike":
+        mikeScenes()
     
-    #pos = pygame.mouse.get_pos()
-    #print(pos)
+    # Comando para chamar a função de cenas do plano de fundo do jogo e lixeiras
+    elif scenes == "gaming":
+        gammingScene()
+        garbages()
+
+    
+    pos = pygame.mouse.get_pos()
+    print(pos)  # Exibe (x, y)
+
+
+
 
     pygame.display.update()

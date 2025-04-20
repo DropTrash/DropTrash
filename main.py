@@ -1,7 +1,7 @@
 import pygame
 pygame.init()
 
-# Comandos de propriedades da janela
+# Comandos das propriedades da janela
 window = pygame.display.set_mode([1472, 832])
 pygame.display.set_caption("Drop Trash")
 
@@ -18,7 +18,7 @@ def musicMike():
     pygame.mixer.music.play() 
     pygame.mixer.music.set_volume(0.5)
 
-# Função de imagens do jogo
+# Função das imagens do jogo
 def images():
     global backGround
     global mikeScene01
@@ -28,6 +28,7 @@ def images():
     global mikeScene05
     global backGroundGaming
     global papperGarbage
+    global  metalGarbage
 
     backGround = pygame.image.load('assets/HomeScene.png')
     mikeScene01 = pygame.image.load('assets/MikeScene01.png')
@@ -115,8 +116,6 @@ def mikeScenes():
                     scenes = "gaming"
                     return
                     
-
-
     # Controle das cenas do Mike (Lixeiro do jogo)
     if controlMikeScenes == 1:
         window.blit(mikeScene01, (0, 0))
@@ -129,18 +128,28 @@ def mikeScenes():
     elif controlMikeScenes == 5:
         window.blit(mikeScene05, (0, 0))
 
-# Função placeholder para a cena do jogo (você pode completar depois)
+# Função da cena de plano de fundo do jogo
 def gammingScene():
     global loop
     global scenes
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            loop = False
+    
     window.blit(backGroundGaming, (0, 0))
 
 def garbages():
-    window.blit(papperGarbage, (500, 500))
+    global loop
+    global scenes
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            loop = False
+
+    window.blit(papperGarbage, (450, 10))
+    window.blit(metalGarbage, (800, 10))
     
-
-
-# Inicialização
 musicHome()  
 images()
 loop = True
@@ -158,16 +167,11 @@ while loop:
     elif scenes == "maike":
         mikeScenes()
     
-    # Comando para chamar a função de cenas do plano de fundo do jogo e lixeiras
+    # Comando para chamar a função de cena do plano de fundo do jogo das lixeiras
     elif scenes == "gaming":
         gammingScene()
         garbages()
-
-    
-    pos = pygame.mouse.get_pos()
-    print(pos)  # Exibe (x, y)
-
-
-
+        # pos = pygame.mouse.get_pos()
+        # print(pos) 
 
     pygame.display.update()

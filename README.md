@@ -4,8 +4,8 @@ If you enjoyed the project, leave a ⭐️<strong> [en] </strong>
 
 <h2> Acesso o Wiki da atividade / Access the activity Wiki 👇 </h2>
 
-Para mais informações sobre o assunto, basta acessar este link: http <br>
-For more information on the subject, just click on this link: http
+Para mais informações sobre o assunto, basta acessar este link: https://github.com/DropTrash/DropTrash/wiki <br>
+For more information on the subject, just click on this link: https://github.com/DropTrash/DropTrash/wiki
 
 <h2> Descrição Geral / General Description 🌐 </h2>
 Exemplo. <strong> [pt_br] </strong> 

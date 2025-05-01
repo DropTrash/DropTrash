@@ -17,7 +17,7 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
 
 * [Pygame](https://www.pygame.org/docs/)
 
-<h2> Versões Necessárias / Required Versions 🔢 </h2>
+<h2> Versões Necessárias / Required Versions 🔢🔧 </h2>
 
 <p>Para que esta aplicação funcione corretamente em sua máquina, é necessário que você tenha as seguintes versões instaladas. <strong> [pt_br] </strong> <br></p>
 <p>To ensure this application works correctly on your machine, you need to have the following versions installed. <strong> [en] </strong></p>
@@ -25,7 +25,7 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
 * Python - Versão: 3.0 ou superior <strong> [pt_br] </strong>
 * Python - Version: 3.0 or higher <strong> [en] </strong>
 
-<h2> Bibliotecas Utilizadas / Libraries Used 📖 </h2>
+<h2> Bibliotecas Utilizadas / Libraries Used 📖🔧 </h2>
 
 <p>Aqui estão as bibliotecas que foram utilizadas nesses projetos. <strong> [pt_br] </strong></p>
 <p>Here are the libraries that were used in these projects. <strong> [en] </strong></p>
@@ -47,7 +47,7 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
   <li><strong>sys</strong> - (imported for accessing system-specific functionality) <strong> [en] </strong></li>
 </ul>
 
-<h2> Como rodar a aplicação Single Thread / How to run the Single Thread application ✅ </h2>
+<h2> Como rodar a aplicação Single Thread / How to run the Single Thread application ✅🔧</h2>
 
 ### Pré-Requisitos / Prerequisites
 * Verificar se você possui o Python instalado e sua versão é adequada para o programa. <strong> [pt_br] </strong>
@@ -70,7 +70,7 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
     </li>
 </ol>
 
-<h2> Como rodar a aplicação Multi Thread / How to run the Multi Thread application ✅</h2>
+<h2> Como rodar a aplicação Multi Thread / How to run the Multi Thread application ✅🔧</h2>
 
 ### Pré-Requisitos / Prerequisites
 * Verificar se você possui o Python instalado e sua versão é adequada para o programa. <strong> [pt_br] </strong>
@@ -93,7 +93,7 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
     </li>
 </ol>
 
-## 📌 Socket - Informações importantes sobre a aplicação / Socket - Important Information about the Application 📌
+## 📌 Socket - Informações importantes sobre a aplicação / Socket - Important Information about the Application 📌🔧
 
 <p>Este foi um projeto individual que desenvolvi no ano de 2024, durante o terceiro semestre do curso de Bacharelado em Sistemas de Informação na Faculdade de Computação e Informática (FCI) da Universidade Presbiteriana Mackenzie, como parte da disciplina Comunicação de Dados. <strong> [pt_br] </strong></p>
 <p>This was an individual project I developed in 2024, during the third semester of the Bachelor's degree in Information Systems at the Faculty of Computing and Informatics (FCI) at Mackenzie Presbyterian University, as part of the Data Communication course. <strong> [en] </strong></p>
@@ -103,7 +103,7 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
   <li> Beatriz Pimenta de Camargo - <a href="mailto:10428378@mackenzista.com.br">10428378@mackenzista.com.br</a> - RA: 10428378 </li>
 </ul>
 
-<h2> Aplicação em Funcionamento / Application in Operation ▶️ </h2>
+<h2> Aplicação em Funcionamento / Application in Operation ▶️🔧 </h2>
 
 <p>Assista ao vídeo abaixo para ver a aplicação em funcionamento. Não deixe de curtir o vídeo e comentar! <strong> [pt_br] </strong></p>
 <p>Watch the video below to see our application in action. Don't forget to like the video and leave a comment! <strong> [en] </strong></p>
@@ -112,7 +112,7 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
     <img src="https://img.youtube.com/vi/WnGZGSNcKVU/0.jpg" width="480" alt="Assista ao vídeo">
 </a>
 
-<h2> Entre em Contato / Get in touch 📬 </h2>
+<h2> Entre em Contato / Get in touch 📬🔧 </h2>
 <p>Se você tiver alguma dúvida ou sugestão sobre este projeto, sinta-se à vontade para entrar em contato pelo email <a href="mailto:beatriz_de_camargo@hotmail.com">beatriz_de_camargo@hotmail.com</a>. <strong> [pt_br] </strong></p>
 <p>If you have any questions or suggestions about this project, feel free to contact me via email at <a href="mailto:beatriz_de_camargo@hotmail.com">beatriz_de_camargo@hotmail.com</a>. <strong> [en] </strong></p>
 

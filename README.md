@@ -111,10 +111,6 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
 <p>Assista ao vídeo abaixo para ver a aplicação em funcionamento. Não deixe de curtir o vídeo e comentar! <strong> [pt_br] </strong></p>
 <p>Watch the video below to see our application in action. Don't forget to like the video and leave a comment! <strong> [en] </strong></p>
 
-<a href="https://www.youtube.com/watch?v=WnGZGSNcKVU&t=1s" target="_blank">
-    <img src="https://img.youtube.com/vi/WnGZGSNcKVU/0.jpg" width="480" alt="Assista ao vídeo">
-</a>
-
 <h2> Entre em Contato / Get in touch 📬🔧 </h2>
 <p>Se você tiver alguma dúvida ou sugestão sobre este projeto, sinta-se à vontade para entrar em contato pelo email <a href="mailto:beatriz_de_camargo@hotmail.com">beatriz_de_camargo@hotmail.com</a>. <strong> [pt_br] </strong></p>
 <p>If you have any questions or suggestions about this project, feel free to contact me via email at <a href="mailto:beatriz_de_camargo@hotmail.com">beatriz_de_camargo@hotmail.com</a>. <strong> [en] </strong></p>

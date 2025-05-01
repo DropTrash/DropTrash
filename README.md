@@ -100,7 +100,10 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
 
 <h2> Integrantes 🔽 </h2>
 <ul>
-  <li> Beatriz Pimenta de Camargo - <a href="mailto:10428378@mackenzista.com.br">10428378@mackenzista.com.br</a> - RA: 10428378 </li>
+  <li> Beatriz Pimenta de Camargo - RA: 10428378 </li>
+  <li> Guilherme Soares Santos - RA: 10428380 </li>
+  <li> Matheus Ricardo de Oliveira Silva – RA: 10418754 </li>
+  <li> Priscila Raquel Herculano Correira – RA: 10420400 </li>
 </ul>
 
 <h2> Aplicação em Funcionamento / Application in Operation ▶️🔧 </h2>

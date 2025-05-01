@@ -15,7 +15,7 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
 
 <h2> Tecnologias Utilizadas / Technologies Used 💻 </h2>
 
-* [Python](https://docs.python.org/pt-br/3/)
+* [Pygame](https://www.pygame.org/docs/)
 
 <h2> Versões Necessárias / Required Versions 🔢 </h2>
 

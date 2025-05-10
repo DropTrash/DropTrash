@@ -37,8 +37,8 @@ def images():
     mikeScene04 = pygame.image.load('assets/MikeScene04.png')
     mikeScene05 = pygame.image.load('assets/MikeScene05.png')
     backGroundGaming = pygame.image.load('assets/GamingScene.png')
-    papperGarbage = pygame.image.load('assets/PapperGarbage.png')
-    metalGarbage = pygame.image.load('assets/MetalGarbage.png')
+    papperGarbage = pygame.image.load('assets/Level01/PapperGarbage.png')
+    metalGarbage = pygame.image.load('assets/Level01/MetalGarbage.png')
 
 
 # Função de transição de imagens (fade)

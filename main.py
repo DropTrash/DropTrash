@@ -28,7 +28,9 @@ def images():
     global mikeScene05
     global backGroundGaming
     global papperGarbage
-    global  metalGarbage
+    global metalGarbage
+    global lifes
+    global player
 
     backGround = pygame.image.load('assets/HomeScene.png')
     mikeScene01 = pygame.image.load('assets/MikeScene01.png')
@@ -39,7 +41,10 @@ def images():
     backGroundGaming = pygame.image.load('assets/GamingScene.png')
     papperGarbage = pygame.image.load('assets/Level01/PapperGarbage.png')
     metalGarbage = pygame.image.load('assets/Level01/MetalGarbage.png')
+    lifes = pygame.image.load('assets/lifes.png')
 
+    player = pygame.image.load('assets/Player.png')
+    player = pygame.transform.scale(player, (350, 200))
 
 # Função de transição de imagens (fade)
 def fade_transition(surface, currentImg, nextImg, speed=10):
@@ -149,7 +154,21 @@ def garbages():
 
     window.blit(papperGarbage, (450, 10))
     window.blit(metalGarbage, (800, 10))
+
+def playerLife():
+    global loop
+    global scenes
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            loop = False
     
+    window.blit(player, (0, 0))
+    #window.blit(lifes, (50, 10))
+    #window.blit(lifes, (90, 10))
+    #window.blit(lifes, (150, 10))
+
+# Inicialização do jogo
 musicHome()  
 images()
 loop = True
@@ -171,6 +190,7 @@ while loop:
     elif scenes == "gaming":
         gammingScene()
         garbages()
+        playerLife()
         # pos = pygame.mouse.get_pos()
         # print(pos) 
 

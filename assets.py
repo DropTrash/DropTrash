@@ -1,6 +1,7 @@
 import pygame
 import settings
 
+# --- Variáveis Globais para Assets Carregados ---
 backGround = None
 mikeScene01, mikeScene02, mikeScene03, mikeScene04, mikeScene05 = (
     None,
@@ -11,105 +12,92 @@ mikeScene01, mikeScene02, mikeScene03, mikeScene04, mikeScene05 = (
 )
 backGroundGaming = None
 gameOver_bg_img = None
+victory_screen_bg_img = None  # Para a tela de vitória
+
+# Lixeiras
 papperGarbage_bin_img = None
 metalGarbage_bin_img = None
-paper_trash_item_img = None
-metal_trash_item_img = None
-lifes_img = None
-player_img = None
-font_large = None
-font_medium = None
-mike_lvl2_intro_img = None
-mike_lvl2_explain_img = None
 organic_bin_img = None
 glass_bin_img = None
 plastic_bin_img = None
-organic_waste_item_img = None
-glass_waste_item_img = None
-plastic_waste_item_img = None
+
+# Listas para armazenar as variações de imagens de lixo carregadas e redimensionadas
+paper_trash_images = []
+metal_trash_images = []
+organic_trash_images = []
+glass_trash_images = []
+plastic_trash_images = []
+
+# Assets Comuns
+lifes_img = None
+player_img = None
+
+# Fontes
+font_large = None
+font_medium = None
+font_pixel = None
+
+# Cutscenes Nível 2
+mike_lvl2_intro_img = None
+mike_lvl2_explain_img = None
 
 
 def load_all_assets():
     global backGround, mikeScene01, mikeScene02, mikeScene03, mikeScene04, mikeScene05
     global backGroundGaming, papperGarbage_bin_img, metalGarbage_bin_img
-    global lifes_img, player_img, paper_trash_item_img, metal_trash_item_img
-    global font_large, font_medium, gameOver_bg_img
+    global lifes_img, player_img, font_large, font_medium, gameOver_bg_img, font_pixel
     global mike_lvl2_intro_img, mike_lvl2_explain_img
     global organic_bin_img, glass_bin_img, plastic_bin_img
-    global organic_waste_item_img, glass_waste_item_img, plastic_waste_item_img
+    global paper_trash_images, metal_trash_images, organic_trash_images, glass_trash_images, plastic_trash_images
+    global victory_screen_bg_img
 
+    paper_trash_images.clear()
+    metal_trash_images.clear()
+    organic_trash_images.clear()
+    glass_trash_images.clear()
+    plastic_trash_images.clear()
+
+    # --- Carregamento de Fundos e Cenas ---
     try:
         backGround = pygame.image.load(settings.ASSET_HOME_SCENE).convert()
+    except pygame.error as e:
+        print(f"Erro ao carregar {settings.ASSET_HOME_SCENE}: {e}")
+    try:
         mikeScene01 = pygame.image.load(settings.ASSET_MIKE_SCENE_01).convert()
+    except pygame.error as e:
+        print(f"Erro ao carregar {settings.ASSET_MIKE_SCENE_01}: {e}")
+    try:
         mikeScene02 = pygame.image.load(settings.ASSET_MIKE_SCENE_02).convert()
+    except pygame.error as e:
+        print(f"Erro ao carregar {settings.ASSET_MIKE_SCENE_02}: {e}")
+    try:
         mikeScene03 = pygame.image.load(settings.ASSET_MIKE_SCENE_03).convert()
+    except pygame.error as e:
+        print(f"Erro ao carregar {settings.ASSET_MIKE_SCENE_03}: {e}")
+    try:
         mikeScene04 = pygame.image.load(settings.ASSET_MIKE_SCENE_04).convert()
+    except pygame.error as e:
+        print(f"Erro ao carregar {settings.ASSET_MIKE_SCENE_04}: {e}")
+    try:
         mikeScene05 = pygame.image.load(settings.ASSET_MIKE_SCENE_05).convert()
+    except pygame.error as e:
+        print(f"Erro ao carregar {settings.ASSET_MIKE_SCENE_05}: {e}")
+    try:
         backGroundGaming = pygame.image.load(settings.ASSET_GAMING_SCENE).convert()
     except pygame.error as e:
-        print(f"Erro ao carregar imagens de cena: {e}")
-
-    try:
-        papperGarbage_bin_img = pygame.image.load(
-            settings.ASSET_PAPER_BIN
-        ).convert_alpha()
-    except pygame.error as e:
-        print(f"Erro ao carregar lixeira de papel: {e}")
-    try:
-        metalGarbage_bin_img = pygame.image.load(
-            settings.ASSET_METAL_BIN
-        ).convert_alpha()
-    except pygame.error as e:
-        print(f"Erro ao carregar lixeira de metal: {e}")
-    try:
-        lifes_img = pygame.image.load(settings.ASSET_LIFES).convert_alpha()
-    except pygame.error as e:
-        print(f"Erro ao carregar imagem de vidas: {e}")
-    try:
-        player_img_original = pygame.image.load(settings.ASSET_PLAYER).convert_alpha()
-        player_img = pygame.transform.scale(player_img_original, (100, 60))
-    except pygame.error as e:
-        print(f"Erro ao carregar imagem do jogador: {e}")
-
-    try:
-        paper_trash_item_img_original = pygame.image.load(
-            settings.ASSET_PAPER_WASTE
-        ).convert_alpha()
-        paper_trash_item_img = pygame.transform.scale(
-            paper_trash_item_img_original, (settings.TRASH_WIDTH, settings.TRASH_HEIGHT)
-        )
-    except pygame.error as e:
-        print(f"Erro ao carregar lixo de papel: {e}")
-    try:
-        metal_trash_item_img_original = pygame.image.load(
-            settings.ASSET_SODA_CAN
-        ).convert_alpha()
-        metal_trash_item_img = pygame.transform.scale(
-            metal_trash_item_img_original, (settings.TRASH_WIDTH, settings.TRASH_HEIGHT)
-        )
-    except pygame.error as e:
-        print(f"Erro ao carregar lixo de metal: {e}")
-
-    try:
-        font_large = pygame.font.SysFont(
-            settings.FONT_DEFAULT_SYS, settings.FONT_SIZE_LARGE
-        )
-        font_medium = pygame.font.SysFont(
-            settings.FONT_DEFAULT_SYS, settings.FONT_SIZE_MEDIUM
-        )
-    except pygame.error:
-        print("Aviso: Fonte do sistema não encontrada, usando fonte padrão do Pygame.")
-        font_large = pygame.font.Font(None, settings.FONT_SIZE_LARGE)
-        font_medium = pygame.font.Font(None, settings.FONT_SIZE_MEDIUM)
-
+        print(f"Erro ao carregar {settings.ASSET_GAMING_SCENE}: {e}")
     try:
         gameOver_bg_img = pygame.image.load(settings.ASSET_GAME_OVER_BG).convert()
     except pygame.error as e:
-        print(
-            f"Erro ao carregar imagem de Game Over: {settings.ASSET_GAME_OVER_BG} - {e}"
-        )
-        gameOver_bg_img = None
+        print(f"Erro ao carregar {settings.ASSET_GAME_OVER_BG}: {e}")
+    try:
+        victory_screen_bg_img = pygame.image.load(
+            settings.ASSET_VICTORY_SCREEN_BG
+        ).convert()  # Carrega tela de vitória
+    except pygame.error as e:
+        print(f"Erro ao carregar {settings.ASSET_VICTORY_SCREEN_BG}: {e}")
 
+    # Cutscenes Nível 2
     try:
         mike_lvl2_intro_img = pygame.image.load(
             settings.ASSET_MIKE_LVL2_INTRO
@@ -123,63 +111,115 @@ def load_all_assets():
     except pygame.error as e:
         print(f"Erro ao carregar {settings.ASSET_MIKE_LVL2_EXPLAIN}: {e}")
 
+    # --- Carregamento de Lixeiras ---
     try:
-        organic_bin_original = pygame.image.load(
-            settings.ASSET_ORGANIC_BIN
+        papperGarbage_bin_img = pygame.image.load(
+            settings.ASSET_PAPER_BIN
         ).convert_alpha()
+    except pygame.error as e:
+        print(f"Erro ao carregar {settings.ASSET_PAPER_BIN}: {e}")
+    try:
+        metalGarbage_bin_img = pygame.image.load(
+            settings.ASSET_METAL_BIN
+        ).convert_alpha()
+    except pygame.error as e:
+        print(f"Erro ao carregar {settings.ASSET_METAL_BIN}: {e}")
+    try:
+        img_orig = pygame.image.load(settings.ASSET_ORGANIC_BIN).convert_alpha()
         organic_bin_img = pygame.transform.scale(
-            organic_bin_original,
-            (settings.BIN_ORGANIC_WIDTH, settings.BIN_ORGANIC_HEIGHT),
+            img_orig, (settings.BIN_ORGANIC_WIDTH, settings.BIN_ORGANIC_HEIGHT)
         )
     except pygame.error as e:
-        print(f"Erro ao carregar/redimensionar lixeira orgânica: {e}")
+        print(f"Erro ao carregar/redim. {settings.ASSET_ORGANIC_BIN}: {e}")
     try:
-        glass_bin_original = pygame.image.load(settings.ASSET_GLASS_BIN).convert_alpha()
+        img_orig = pygame.image.load(settings.ASSET_GLASS_BIN).convert_alpha()
         glass_bin_img = pygame.transform.scale(
-            glass_bin_original, (settings.BIN_GLASS_WIDTH, settings.BIN_GLASS_HEIGHT)
+            img_orig, (settings.BIN_GLASS_WIDTH, settings.BIN_GLASS_HEIGHT)
         )
     except pygame.error as e:
-        print(f"Erro ao carregar/redimensionar lixeira de vidro: {e}")
+        print(f"Erro ao carregar/redim. {settings.ASSET_GLASS_BIN}: {e}")
     try:
-        plastic_bin_original = pygame.image.load(
-            settings.ASSET_PLASTIC_BIN
-        ).convert_alpha()
+        img_orig = pygame.image.load(settings.ASSET_PLASTIC_BIN).convert_alpha()
         plastic_bin_img = pygame.transform.scale(
-            plastic_bin_original,
-            (settings.BIN_PLASTIC_WIDTH, settings.BIN_PLASTIC_HEIGHT),
+            img_orig, (settings.BIN_PLASTIC_WIDTH, settings.BIN_PLASTIC_HEIGHT)
         )
     except pygame.error as e:
-        print(f"Erro ao carregar/redimensionar lixeira de plástico: {e}")
+        print(f"Erro ao carregar/redim. {settings.ASSET_PLASTIC_BIN}: {e}")
 
+    # --- Assets Comuns ---
     try:
-        organic_waste_original = pygame.image.load(
-            settings.ASSET_ORGANIC_WASTE
-        ).convert_alpha()
-        organic_waste_item_img = pygame.transform.scale(
-            organic_waste_original,
-            (settings.TRASH_WIDTH_ORGANIC, settings.TRASH_HEIGHT_ORGANIC),
+        lifes_img = pygame.image.load(settings.ASSET_LIFES).convert_alpha()
+    except pygame.error as e:
+        print(f"Erro ao carregar {settings.ASSET_LIFES}: {e}")
+    try:
+        player_img_original = pygame.image.load(settings.ASSET_PLAYER).convert_alpha()
+        player_img = pygame.transform.scale(player_img_original, (100, 60))
+    except pygame.error as e:
+        print(f"Erro ao carregar {settings.ASSET_PLAYER}: {e}")
+
+    # --- Carregamento e Redimensionamento de Lixos (com variedade) ---
+    trash_size = (settings.TRASH_WIDTH, settings.TRASH_HEIGHT)
+
+    _load_and_add_trash_variation(
+        settings.ASSET_PAPER_AMASSADO, trash_size, paper_trash_images
+    )
+    _load_and_add_trash_variation(
+        settings.ASSET_PAPER_CAIXA, trash_size, paper_trash_images
+    )
+    _load_and_add_trash_variation(
+        settings.ASSET_METAL_LATA, trash_size, metal_trash_images
+    )
+    _load_and_add_trash_variation(
+        settings.ASSET_METAL_SPRAY, trash_size, metal_trash_images
+    )
+    _load_and_add_trash_variation(
+        settings.ASSET_ORGANIC_BANANA, trash_size, organic_trash_images
+    )
+    _load_and_add_trash_variation(
+        settings.ASSET_ORGANIC_BROCOLIS, trash_size, organic_trash_images
+    )
+    _load_and_add_trash_variation(
+        settings.ASSET_GLASS_GELEIA, trash_size, glass_trash_images
+    )
+    _load_and_add_trash_variation(
+        settings.ASSET_GLASS_VINHO, trash_size, glass_trash_images
+    )
+    _load_and_add_trash_variation(
+        settings.ASSET_PLASTIC_PET, trash_size, plastic_trash_images
+    )
+
+    # --- Carregamento de Fontes ---
+    try:
+        font_large = pygame.font.SysFont(
+            settings.FONT_DEFAULT_SYS, settings.FONT_SIZE_LARGE
+        )
+        font_medium = pygame.font.SysFont(
+            settings.FONT_DEFAULT_SYS, settings.FONT_SIZE_MEDIUM
+        )
+    except pygame.error:
+        print("Aviso: Fonte Arial não encontrada, usando fonte padrão.")
+        font_large = pygame.font.Font(None, settings.FONT_SIZE_LARGE)
+        font_medium = pygame.font.Font(None, settings.FONT_SIZE_MEDIUM)
+    try:
+        font_pixel = pygame.font.Font(
+            settings.FONT_PIXEL_PATH, settings.FONT_PIXEL_SIZE
         )
     except pygame.error as e:
-        print(f"Erro ao carregar lixo orgânico Nível 2: {e}")
-    try:
-        glass_waste_original = pygame.image.load(
-            settings.ASSET_GLASS_WASTE
-        ).convert_alpha()
-        glass_waste_item_img = pygame.transform.scale(
-            glass_waste_original,
-            (settings.TRASH_WIDTH_GLASS, settings.TRASH_HEIGHT_GLASS),
+        print(
+            f"Aviso: Fonte pixel '{settings.FONT_PIXEL_PATH}' não encontrada ({e}). Usando fallback."
         )
-    except pygame.error as e:
-        print(f"Erro ao carregar lixo de vidro Nível 2: {e}")
-    try:
-        plastic_waste_original = pygame.image.load(
-            settings.ASSET_PLASTIC_WASTE
-        ).convert_alpha()
-        plastic_waste_item_img = pygame.transform.scale(
-            plastic_waste_original,
-            (settings.TRASH_WIDTH_PLASTIC, settings.TRASH_HEIGHT_PLASTIC),
-        )
-    except pygame.error as e:
-        print(f"Erro ao carregar lixo de plástico Nível 2: {e}")
+        font_pixel = pygame.font.Font(None, settings.FONT_PIXEL_SIZE)
 
     print("Assets carregados com sucesso!")
+
+
+def _load_and_add_trash_variation(asset_path, size, trash_list):
+    """Função auxiliar para carregar, redimensionar e adicionar uma variação de lixo a uma lista."""
+    if not asset_path:
+        return  # Se o caminho do asset não foi definido em settings
+    try:
+        original_img = pygame.image.load(asset_path).convert_alpha()
+        scaled_img = pygame.transform.scale(original_img, size)
+        trash_list.append(scaled_img)
+    except pygame.error as e:
+        print(f"Erro ao carregar/redimensionar lixo: {asset_path} - {e}")

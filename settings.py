@@ -18,17 +18,9 @@ MIN_DISTANCE_BETWEEN_TRASH = 70
 LEVEL_TIME_SECONDS_LVL1 = 30
 LEVEL_TIME_SECONDS_LVL2 = 90
 
-# Tamanhos Padrão para Lixos (Nível 1 e como fallback)
-TRASH_WIDTH = 70
-TRASH_HEIGHT = 70
-
-# --- TAMANHOS ESPECÍFICOS PARA LIXOS DO NÍVEL 2 (AJUSTE MANUAL) ---
-TRASH_WIDTH_ORGANIC = 70
-TRASH_HEIGHT_ORGANIC = 70
-TRASH_WIDTH_GLASS = 70
-TRASH_HEIGHT_GLASS = 70
-TRASH_WIDTH_PLASTIC = 70
-TRASH_HEIGHT_PLASTIC = 70
+# Tamanhos Padrão para Lixos
+TRASH_WIDTH = 70  # Largura padrão para todos os lixos
+TRASH_HEIGHT = 70  # Altura padrão para todos os lixos
 
 # --- TAMANHOS ESPECÍFICOS PARA LIXEIRAS DO NÍVEL 2 (AJUSTE MANUAL) ---
 BIN_ORGANIC_WIDTH = 180
@@ -38,6 +30,19 @@ BIN_GLASS_HEIGHT = 220
 BIN_PLASTIC_WIDTH = 180
 BIN_PLASTIC_HEIGHT = 220
 
+# --- COORDENADAS E DIMENSÕES PARA BOTÕES NA TELA DE GAME OVER ---
+GAMEOVER_RETRY_BUTTON_RECT = pygame.Rect(500, 580, 220, 90)
+GAMEOVER_QUIT_BUTTON_RECT = pygame.Rect(780, 580, 200, 90)
+
+# --- CONFIGURAÇÃO DE QUANTIDADE DE LIXOS POR NÍVEL ---
+# Nível 1: Total de lixos de papel e metal
+NUM_TOTAL_PAPER_TRASH_LVL1 = 4  # Ex: 2 caixas, 2 papéis amassados
+NUM_TOTAL_METAL_TRASH_LVL1 = 4  # Ex: 2 sprays, 2 latas
+
+# Nível 2: Total de lixos orgânicos, vidro e plástico
+NUM_TOTAL_ORGANIC_TRASH_LVL2 = 4  # Ex: 2 bananas, 2 brócolis
+NUM_TOTAL_GLASS_TRASH_LVL2 = 4  # Ex: 2 geleias, 2 vinhos
+NUM_TOTAL_PLASTIC_TRASH_LVL2 = 3  # Plástico continua com um único tipo visual
 
 # Caminhos para Assets
 MUSIC_NATURE = "music/natureSound.mp3"
@@ -54,21 +59,37 @@ ASSET_PAPER_BIN = "assets/Level01/PapperGarbage.png"
 ASSET_METAL_BIN = "assets/Level01/MetalGarbage.png"
 ASSET_LIFES = "assets/Lifes.png"
 ASSET_PLAYER = "assets/Player.png"
-ASSET_PAPER_WASTE = "assets/Level01/PaperWaste.png"
-ASSET_SODA_CAN = "assets/Level01/SodaCan.png"
 ASSET_GAME_OVER_BG = "assets/GameOverScreen.png"
 
 # Fontes
-FONT_DEFAULT_SYS = "Arial"  # Pygame tentará usar esta fonte do sistema
+FONT_DEFAULT_SYS = "Arial"
 FONT_SIZE_LARGE = 72
 FONT_SIZE_MEDIUM = 48
+FONT_PIXEL_PATH = "assets/Fonts/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf"
+FONT_PIXEL_SIZE = 40
 
-# --- CAMINHOS PARA NOVOS ASSETS DO NÍVEL 2 ---
+# --- CAMINHOS PARA ASSETS DE LIXO (COM VARIEDADE) ---
+# Nível 1
+ASSET_PAPER_AMASSADO = "assets/Level01/PaperWaste.png"
+ASSET_PAPER_CAIXA = "assets/Level01/CaixaPapelao.png"
+ASSET_METAL_LATA = "assets/Level01/SodaCan.png"
+ASSET_METAL_SPRAY = "assets/Level01/SprayCan.png"
+
+# Nível 2
+ASSET_ORGANIC_BANANA = "assets/Level02/Banana.png"
+ASSET_ORGANIC_BROCOLIS = "assets/Level02/Brocolis.png"
+ASSET_GLASS_GELEIA = "assets/Level02/GeleiaPixel.png"
+ASSET_GLASS_VINHO = "assets/Level02/Vinho.png"
+ASSET_PLASTIC_PET = "assets/Level02/PlasticoPixel.png"
+
+# Cutscenes Nível 2
 ASSET_MIKE_LVL2_INTRO = "assets/Level02/Nivel2Mike.png"
 ASSET_MIKE_LVL2_EXPLAIN = "assets/Level02/SceneAwareness.png"
+
+# Lixeiras Nível 2
 ASSET_ORGANIC_BIN = "assets/Level02/OrganicGarbage.png"
 ASSET_GLASS_BIN = "assets/Level02/GlassGarbage.png"
 ASSET_PLASTIC_BIN = "assets/Level02/PlasticGarbage.png"
-ASSET_ORGANIC_WASTE = "assets/Level02/Banana.png"
-ASSET_GLASS_WASTE = "assets/Level02/GeleiaPixel.png"
-ASSET_PLASTIC_WASTE = "assets/Level02/PlasticoPixel.png"
+
+# --- IMAGEM PARA TELA DE VITÓRIA ---
+ASSET_VICTORY_SCREEN_BG = "assets/Fim.png"

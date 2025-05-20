@@ -13,13 +13,14 @@ def setup_gaming_scene():
     game_state.current_lifes = settings.MAX_LIFES
     game_state.dragging_item = None
     game_state.level_start_time = pygame.time.get_ticks()
-    trash_types_to_spawn = []
+
+    trash_categories_to_spawn_info = []
 
     reference_bin_img_for_lvl2_width = (
         assets.organic_bin_img
         if assets.organic_bin_img
         else assets.papperGarbage_bin_img
-    )  # Fallback
+    )
 
     if game_state.current_level == 1:
         game_state.time_remaining = settings.LEVEL_TIME_SECONDS_LVL1
@@ -40,28 +41,26 @@ def setup_gaming_scene():
                 }
             )
 
-        num_paper_trash_lvl1 = 3
-        num_metal_trash_lvl1 = 3
-        if assets.paper_trash_item_img:
-            trash_types_to_spawn.append(
+        if assets.paper_trash_images:
+            trash_categories_to_spawn_info.append(
                 {
                     "type": "paper",
-                    "image": assets.paper_trash_item_img,
-                    "count": num_paper_trash_lvl1,
+                    "image_list": assets.paper_trash_images,
+                    "count": settings.NUM_TOTAL_PAPER_TRASH_LVL1,
                 }
             )
-        if assets.metal_trash_item_img:
-            trash_types_to_spawn.append(
+        if assets.metal_trash_images:
+            trash_categories_to_spawn_info.append(
                 {
                     "type": "metal",
-                    "image": assets.metal_trash_item_img,
-                    "count": num_metal_trash_lvl1,
+                    "image_list": assets.metal_trash_images,
+                    "count": settings.NUM_TOTAL_METAL_TRASH_LVL1,
                 }
             )
 
     elif game_state.current_level == 2:
         game_state.time_remaining = settings.LEVEL_TIME_SECONDS_LVL2
-        num_bins_lvl2 = 3  # Apenas 3 lixeiras
+        num_bins_lvl2 = 3
         bin_width_ref = (
             reference_bin_img_for_lvl2_width.get_width()
             if reference_bin_img_for_lvl2_width
@@ -69,7 +68,7 @@ def setup_gaming_scene():
         )
 
         total_bin_image_width = num_bins_lvl2 * bin_width_ref
-        spacing_between_bins = 60  # Aumentar espaçamento
+        spacing_between_bins = 60
         total_spacing_width = (num_bins_lvl2 - 1) * spacing_between_bins
         block_width = total_bin_image_width + total_spacing_width
         bin_start_x = (settings.WINDOW_WIDTH - block_width) // 2
@@ -109,80 +108,88 @@ def setup_gaming_scene():
                 }
             )
 
-        num_each_trash_lvl2 = 3
-        if assets.organic_waste_item_img:
-            trash_types_to_spawn.append(
+        if assets.organic_trash_images:
+            trash_categories_to_spawn_info.append(
                 {
                     "type": "organic",
-                    "image": assets.organic_waste_item_img,
-                    "count": num_each_trash_lvl2,
+                    "image_list": assets.organic_trash_images,
+                    "count": settings.NUM_TOTAL_ORGANIC_TRASH_LVL2,
                 }
             )
-        if assets.glass_waste_item_img:
-            trash_types_to_spawn.append(
+        if assets.glass_trash_images:
+            trash_categories_to_spawn_info.append(
                 {
                     "type": "glass",
-                    "image": assets.glass_waste_item_img,
-                    "count": num_each_trash_lvl2,
+                    "image_list": assets.glass_trash_images,
+                    "count": settings.NUM_TOTAL_GLASS_TRASH_LVL2,
                 }
             )
-        if assets.plastic_waste_item_img:
-            trash_types_to_spawn.append(
+        if assets.plastic_trash_images:
+            trash_categories_to_spawn_info.append(
                 {
                     "type": "plastic",
-                    "image": assets.plastic_waste_item_img,
-                    "count": num_each_trash_lvl2,
+                    "image_list": assets.plastic_trash_images,
+                    "count": settings.NUM_TOTAL_PLASTIC_TRASH_LVL2,
                 }
             )
 
-    all_trash_to_spawn_list = []
-    for trash_spec in trash_types_to_spawn:
-        if trash_spec["image"] is None:
+    all_trash_to_spawn_final_list = []
+    for category_info in trash_categories_to_spawn_info:
+        image_list_for_category = category_info["image_list"]
+        if not image_list_for_category:
             print(
-                f"Aviso: Imagem para lixo tipo '{trash_spec['type']}' não carregada. Pulando spawn."
+                f"Aviso: Nenhuma imagem de lixo carregada para a categoria '{category_info['type']}'. Pulando spawn."
             )
             continue
-        for _ in range(trash_spec["count"]):
-            all_trash_to_spawn_list.append(
-                {"type": trash_spec["type"], "image": trash_spec["image"]}
+        for _ in range(category_info["count"]):
+            chosen_image = random.choice(image_list_for_category)
+            all_trash_to_spawn_final_list.append(
+                {"type": category_info["type"], "image": chosen_image}
             )
-    random.shuffle(all_trash_to_spawn_list)
+
+    random.shuffle(all_trash_to_spawn_final_list)
 
     margin_x = 100
     reference_bin_height = 0
     if game_state.garbage_bins and game_state.garbage_bins[0]["image"]:
         reference_bin_height = game_state.garbage_bins[0]["image"].get_height()
-
     margin_y_top = reference_bin_height + 120 if reference_bin_height > 0 else 150
-
     margin_y_bottom = 100
-    reference_trash_img = (
-        assets.paper_trash_item_img
-        if assets.paper_trash_item_img
-        else pygame.Surface((1, 1))
-    )  # Fallback
+
+    reference_trash_img_for_spawn_area = pygame.Surface(
+        (settings.TRASH_WIDTH, settings.TRASH_HEIGHT)
+    )
 
     spawn_area_x_start = margin_x
     spawn_area_x_end = (
-        settings.WINDOW_WIDTH - margin_x - reference_trash_img.get_width()
+        settings.WINDOW_WIDTH
+        - margin_x
+        - reference_trash_img_for_spawn_area.get_width()
     )
     spawn_area_y_start = margin_y_top
     spawn_area_y_end = (
-        settings.WINDOW_HEIGHT - margin_y_bottom - reference_trash_img.get_height()
+        settings.WINDOW_HEIGHT
+        - margin_y_bottom
+        - reference_trash_img_for_spawn_area.get_height()
     )
 
     if spawn_area_x_end <= spawn_area_x_start or spawn_area_y_end <= spawn_area_y_start:
         print(
             "Aviso: Área de spawn inválida. Verifique as margens e tamanhos dos assets."
         )
-        # Definir uma área de spawn mínima para evitar erro no random.randint
         spawn_area_x_end = max(spawn_area_x_start + 1, spawn_area_x_end)
         spawn_area_y_end = max(spawn_area_y_start + 1, spawn_area_y_end)
 
-    for trash_info in all_trash_to_spawn_list:
+    for trash_info in all_trash_to_spawn_final_list:
         placed = False
         attempts = 0
         while not placed and attempts < 100:
+            if not trash_info["image"]:
+                print(
+                    f"Aviso: Tentando posicionar lixo tipo {trash_info['type']} sem imagem. Pulando."
+                )
+                attempts = 100
+                continue
             pos_x = random.randint(spawn_area_x_start, spawn_area_x_end)
             pos_y = random.randint(spawn_area_y_start, spawn_area_y_end)
             new_trash_rect = trash_info["image"].get_rect(topleft=(pos_x, pos_y))
@@ -207,9 +214,9 @@ def setup_gaming_scene():
                 )
                 placed = True
             attempts += 1
-        if not placed:
+        if not placed and trash_info["image"]:
             print(
-                f"Aviso: Não foi possível posicionar um lixo do tipo {trash_info['type']}."
+                f"Aviso: Não foi possível posicionar um lixo do tipo {trash_info['type']} com imagem {trash_info['image']}."
             )
 
 
@@ -224,15 +231,19 @@ def homeScene(window, main_loop_flag):
                     if assets.mikeScene01
                     else assets.backGroundGaming
                 )
-                utils.fade_transition(window, assets.backGround, next_img)
+                if assets.backGround and next_img:
+                    utils.fade_transition(window, assets.backGround, next_img)
+                elif next_img:
+                    window.blit(next_img, (0, 0))
+
                 pygame.mixer.music.stop()
                 if assets.mikeScene01:
                     utils.musicMike()
                     game_state.current_scene_name = "maike_intro_lvl1"
                     game_state.control_mike_scenes = 1
-                else:  # Fallback se a cena do Mike não carregou
+                else:
                     game_state.current_scene_name = "gaming"
-                    setup_gaming_scene()  # Configura para o nível 1
+                    setup_gaming_scene()
                     utils.musicHome()
                 game_state.current_level = 1
                 return
@@ -269,9 +280,15 @@ def mikeScenes_Intro_Lvl1(window, main_loop_flag):
             if event.key == pygame.K_d:
                 next_control_state = game_state.control_mike_scenes + 1
                 if next_control_state > 5:
-                    utils.fade_transition(
-                        window, current_mike_scene_img, assets.backGroundGaming
-                    )
+                    if current_mike_scene_img and assets.backGroundGaming:
+                        utils.fade_transition(
+                            window, current_mike_scene_img, assets.backGroundGaming
+                        )
+                    elif assets.backGroundGaming:
+                        window.blit(assets.backGroundGaming, (0, 0))
+                    else:
+                        print("Aviso: backGroundGaming não carregado para transição.")
+
                     game_state.current_level = 1
                     setup_gaming_scene()
                     utils.musicHome()
@@ -279,9 +296,7 @@ def mikeScenes_Intro_Lvl1(window, main_loop_flag):
                     return
                 else:
                     temp_next_scene_img = scenes_map.get(next_control_state)
-                    if (
-                        temp_next_scene_img and current_mike_scene_img
-                    ):  # Garante que ambas imagens existem para fade
+                    if temp_next_scene_img and current_mike_scene_img:
                         utils.fade_transition(
                             window, current_mike_scene_img, temp_next_scene_img
                         )
@@ -292,15 +307,21 @@ def mikeScenes_Intro_Lvl1(window, main_loop_flag):
                         print(
                             f"Aviso: Próxima imagem da cena do Mike ({next_control_state}) não carregada. Pulando para jogo."
                         )
-                        utils.fade_transition(
-                            window,
-                            (
-                                current_mike_scene_img
-                                if current_mike_scene_img
-                                else assets.backGround
-                            ),
-                            assets.backGroundGaming,
+                        fallback_current = (
+                            current_mike_scene_img
+                            if current_mike_scene_img
+                            else assets.backGround
                         )
+                        if fallback_current and assets.backGroundGaming:
+                            utils.fade_transition(
+                                window, fallback_current, assets.backGroundGaming
+                            )
+                        elif assets.backGroundGaming:
+                            window.blit(assets.backGroundGaming, (0, 0))
+                        else:
+                            print(
+                                "Aviso: Imagens de fallback para transição não carregadas."
+                            )
                         game_state.current_level = 1
                         setup_gaming_scene()
                         utils.musicHome()
@@ -329,15 +350,21 @@ def mikeScenes_Intro_Lvl2(window, main_loop_flag):
             main_loop_flag[0] = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_d:
-                utils.fade_transition(
-                    window, current_scene_image, assets.backGroundGaming
-                )
+                if assets.backGroundGaming and current_scene_image:
+                    utils.fade_transition(
+                        window, current_scene_image, assets.backGroundGaming
+                    )
+                elif assets.backGroundGaming:
+                    window.blit(assets.backGroundGaming, (0, 0))
+                else:
+                    print("Aviso: backGroundGaming não carregado para transição.")
                 game_state.current_level = 2
                 setup_gaming_scene()
                 utils.musicHome()
                 game_state.current_scene_name = "gaming"
                 return
-    window.blit(current_scene_image, (0, 0))
+    if current_scene_image:
+        window.blit(current_scene_image, (0, 0))
 
 
 def mikeScenes_Explain_Lvl2_GameOver(window, main_loop_flag):
@@ -357,12 +384,22 @@ def mikeScenes_Explain_Lvl2_GameOver(window, main_loop_flag):
                 next_img_for_fade = (
                     assets.gameOver_bg_img
                     if assets.gameOver_bg_img
-                    else assets.backGroundGaming
-                )  # Fallback
-                utils.fade_transition(window, current_scene_image, next_img_for_fade)
+                    else (
+                        assets.backGroundGaming
+                        if assets.backGroundGaming
+                        else pygame.Surface((1, 1))
+                    )
+                )
+                if current_scene_image and next_img_for_fade:
+                    utils.fade_transition(
+                        window, current_scene_image, next_img_for_fade
+                    )
+                elif next_img_for_fade:
+                    window.blit(next_img_for_fade, (0, 0))
                 game_state.current_scene_name = "game_over_final"
                 return
-    window.blit(current_scene_image, (0, 0))
+    if current_scene_image:
+        window.blit(current_scene_image, (0, 0))
 
 
 def gamingScene(window, main_loop_flag):
@@ -381,12 +418,13 @@ def gamingScene(window, main_loop_flag):
         game_state.time_remaining = time_limit_for_level - elapsed_seconds
         if game_state.time_remaining <= 0:
             game_state.time_remaining = 0
-            if game_state.current_scene_name == "gaming":
+            if (
+                game_state.current_scene_name == "gaming"
+            ):  # Só muda de cena se ainda estiver no jogo
                 print("Tempo esgotado! Game Over.")
-                game_state.current_scene_name = (
-                    "game_over_final"  # Direto para a tela final
-                )
+                game_state.current_scene_name = "game_over_final"
                 pygame.mixer.music.stop()
+                return  # Importante para processar a mudança de cena no loop principal
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -400,7 +438,7 @@ def gamingScene(window, main_loop_flag):
             ):
                 for i in range(len(game_state.trash_items) - 1, -1, -1):
                     item = game_state.trash_items[i]
-                    if item["rect"].collidepoint(event.pos):
+                    if item["image"] and item["rect"].collidepoint(event.pos):
                         game_state.dragging_item = item
                         game_state.mouse_offset_x = item["rect"].x - event.pos[0]
                         game_state.mouse_offset_y = item["rect"].y - event.pos[1]
@@ -410,35 +448,52 @@ def gamingScene(window, main_loop_flag):
         elif event.type == pygame.MOUSEBUTTONUP:
             if event.button == 1 and game_state.dragging_item:
                 collided_with_any_bin = False
-                for bin_obj in game_state.garbage_bins:
-                    if game_state.dragging_item["rect"].colliderect(bin_obj["rect"]):
-                        collided_with_any_bin = True
-                        if game_state.dragging_item["type"] == bin_obj["type"]:
-                            if game_state.dragging_item in game_state.trash_items:
-                                game_state.trash_items.remove(game_state.dragging_item)
-                        else:
-                            game_state.current_lifes -= 1
-                            print(
-                                f"Lixeira errada! Vidas restantes: {game_state.current_lifes}"
-                            )
-                            game_state.dragging_item["rect"].topleft = (
-                                game_state.dragging_item["initial_pos"]
-                            )
-                            if (
-                                game_state.current_lifes <= 0
-                                and game_state.current_scene_name == "gaming"
-                            ):
-                                print("Game Over! (Sem vidas)")
-                                game_state.current_scene_name = "mike_explain_lvl2_gameover"  # Vai para cutscene de explicação
-                                pygame.mixer.music.stop()
-                        break
-                if not collided_with_any_bin:
-                    game_state.dragging_item["rect"].topleft = game_state.dragging_item[
-                        "initial_pos"
-                    ]
+                if game_state.dragging_item["image"]:
+                    for bin_obj in game_state.garbage_bins:
+                        if bin_obj["image"] and game_state.dragging_item[
+                            "rect"
+                        ].colliderect(bin_obj["rect"]):
+                            collided_with_any_bin = True
+                            if game_state.dragging_item["type"] == bin_obj["type"]:
+                                if game_state.dragging_item in game_state.trash_items:
+                                    game_state.trash_items.remove(
+                                        game_state.dragging_item
+                                    )
+                            else:
+                                game_state.current_lifes -= 1
+                                print(
+                                    f"Lixeira errada! Vidas restantes: {game_state.current_lifes}"
+                                )
+                                game_state.dragging_item["rect"].topleft = (
+                                    game_state.dragging_item["initial_pos"]
+                                )
+                                if (
+                                    game_state.current_lifes <= 0
+                                    and game_state.current_scene_name == "gaming"
+                                ):
+                                    print("Game Over! (Sem vidas)")
+                                    pygame.mixer.music.stop()
+                                    if (
+                                        game_state.current_level == 1
+                                    ):  # Perdeu no Nível 1
+                                        game_state.current_scene_name = (
+                                            "game_over_final"
+                                        )
+                                    elif (
+                                        game_state.current_level == 2
+                                    ):  # Perdeu no Nível 2
+                                        game_state.current_scene_name = (
+                                            "mike_explain_lvl2_gameover"
+                                        )
+                                    return  # Importante para processar a mudança de cena
+                            break
+                    if not collided_with_any_bin:
+                        game_state.dragging_item["rect"].topleft = (
+                            game_state.dragging_item["initial_pos"]
+                        )
                 game_state.dragging_item = None
         elif event.type == pygame.MOUSEMOTION:
-            if game_state.dragging_item:
+            if game_state.dragging_item and game_state.dragging_item["image"]:
                 game_state.dragging_item["rect"].x = (
                     event.pos[0] + game_state.mouse_offset_x
                 )
@@ -446,7 +501,8 @@ def gamingScene(window, main_loop_flag):
                     event.pos[1] + game_state.mouse_offset_y
                 )
 
-    window.blit(assets.backGroundGaming, (0, 0))
+    if assets.backGroundGaming:
+        window.blit(assets.backGroundGaming, (0, 0))
     for bin_obj in game_state.garbage_bins:
         if bin_obj["image"]:
             window.blit(bin_obj["image"], bin_obj["rect"])
@@ -456,28 +512,27 @@ def gamingScene(window, main_loop_flag):
     if game_state.dragging_item and game_state.dragging_item["image"]:
         window.blit(game_state.dragging_item["image"], game_state.dragging_item["rect"])
 
+    life_start_x = 20
+    life_start_y = 20
+    life_heart_spacing = 5
+
     if assets.lifes_img:
         life_heart_width = assets.lifes_img.get_width()
-        life_heart_spacing = 10
-        life_start_x = 40
-        life_start_y = 20
         for i in range(game_state.current_lifes):
             pos_x = life_start_x + i * (life_heart_width + life_heart_spacing)
             window.blit(assets.lifes_img, (pos_x, life_start_y))
-    if (
-        assets.player_img and assets.lifes_img
-    ):  # Verifica se lifes_img existe para posicionamento
+
+    if assets.player_img and assets.lifes_img:
         life_heart_width = assets.lifes_img.get_width()
-        player_pos_x = (
-            life_start_x
-            + (life_heart_width // 2)
-            - (assets.player_img.get_width() // 2)
-        )
+        player_pos_x = life_start_x
         player_pos_y = life_start_y + assets.lifes_img.get_height() + 5
         window.blit(assets.player_img, (player_pos_x, player_pos_y))
 
-    if assets.font_medium:
-        timer_text_surface = assets.font_medium.render(
+    font_to_use_for_timer = (
+        assets.font_pixel if assets.font_pixel else assets.font_medium
+    )
+    if font_to_use_for_timer:
+        timer_text_surface = font_to_use_for_timer.render(
             f"Tempo: {max(0, game_state.time_remaining)}s", True, settings.BLACK
         )
         timer_text_rect = timer_text_surface.get_rect(
@@ -495,6 +550,13 @@ def gamingScene(window, main_loop_flag):
     ):
         game_state.level_completed = True
         pygame.mixer.music.stop()
+
+        current_bg_for_fade = (
+            assets.backGroundGaming
+            if assets.backGroundGaming
+            else pygame.Surface((1, 1))
+        )
+
         if game_state.current_level == 1:
             print("Nível 1 Concluído! Indo para a introdução do Nível 2.")
             next_image_for_fade = (
@@ -502,17 +564,24 @@ def gamingScene(window, main_loop_flag):
                 if assets.mike_lvl2_intro_img
                 else assets.backGroundGaming
             )
-            if (
-                assets.backGroundGaming and next_image_for_fade
-            ):  # Garante que ambas imagens existem
-                utils.fade_transition(
-                    window, assets.backGroundGaming, next_image_for_fade
-                )
-            utils.musicMike()
+            if current_bg_for_fade and next_image_for_fade:
+                utils.fade_transition(window, current_bg_for_fade, next_image_for_fade)
+            elif next_image_for_fade:
+                window.blit(next_image_for_fade, (0, 0))
+
+            if assets.mike_lvl2_intro_img:
+                utils.musicMike()
             game_state.current_scene_name = "maike_intro_lvl2"
+            return  # Importante para processar a mudança de cena
         elif game_state.current_level == 2:
             print("Nível 2 Concluído! Você zerou o jogo!")
             game_state.current_scene_name = "victory_screen"
+            # Opcional: fade para tela de vitória
+            if assets.victory_screen_bg_img and current_bg_for_fade:
+                utils.fade_transition(
+                    window, current_bg_for_fade, assets.victory_screen_bg_img
+                )
+            return  # Importante para processar a mudança de cena
 
 
 def gameOverScene_Final(window, main_loop_flag):
@@ -562,29 +631,22 @@ def gameOverScene_Final(window, main_loop_flag):
 
 
 def victoryScreen(window, main_loop_flag):
-    window.fill(settings.WHITE)
-    if assets.font_large and assets.font_medium:
-        victory_text_surface = assets.font_large.render(
-            "PARABÉNS!", True, settings.BLACK
+    if assets.victory_screen_bg_img:
+        scaled_victory_bg = pygame.transform.scale(
+            assets.victory_screen_bg_img,
+            (settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT),
         )
-        text_rect = victory_text_surface.get_rect(
-            center=(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2 - 50)
-        )
-        instruction_text = assets.font_medium.render(
-            "Você completou todos os níveis!", True, settings.BLACK
-        )
-        instruction_rect = instruction_text.get_rect(
-            center=(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2 + 20)
-        )
-        home_text = assets.font_medium.render(
-            "Pressione ENTER para voltar à Home", True, settings.BLACK
-        )
-        home_rect = home_text.get_rect(
-            center=(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2 + 80)
-        )
-        window.blit(victory_text_surface, text_rect)
-        window.blit(instruction_text, instruction_rect)
-        window.blit(home_text, home_rect)
+        window.blit(scaled_victory_bg, (0, 0))
+    else:
+        window.fill(settings.WHITE)
+        if assets.font_large:
+            victory_text_surface = assets.font_large.render(
+                "PARABÉNS!", True, settings.BLACK
+            )
+            text_rect = victory_text_surface.get_rect(
+                center=(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2 - 50)
+            )
+            window.blit(victory_text_surface, text_rect)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

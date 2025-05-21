@@ -71,10 +71,17 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
   <li> Priscila Raquel Herculano Correira – RA: 10420400 </li>
 </ul>
 
-<h2> Aplicação em Funcionamento / Application in Operation ▶️🔧 </h2>
+<h2> Aplicação em Funcionamento / Application in Operation ▶️ </h2>
 
-<p>Assista ao vídeo abaixo para ver a aplicação em funcionamento. <strong> [pt_br] </strong></p>
-<p>Watch the video below to see our application in action. <strong> [en] </strong></p>
+<p>Assista ao vídeo abaixo para ver a aplicação em funcionamento. <strong>[pt_br]</strong></p>
+<p>Watch the video below to see our application in action. <strong>[en]</strong></p>
+
+<p>
+  <a href="https://youtu.be/W2EdhjVojtk" target="_blank" rel="noopener noreferrer">
+    ▶️ Assista ao vídeo / Watch the video
+  </a>
+</p>
+
 
 ![channels4_banner](https://github.com/user-attachments/assets/1021f93c-13a9-486a-8c5c-80624679bb57)
 

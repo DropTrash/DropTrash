@@ -47,7 +47,7 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
   <li><strong>Clone o Repositório / Clone the Repository</strong>
     <p>Clone o repositório para sua máquina local com o seguinte comando: <strong>[pt_br]</strong></p>
     <p>Clone the repository to your local machine using the command below: <strong>[en]</strong></p>
-    <pre><code>git clone https://github.com/seu-usuario/seu-repositorio.git</code></pre>
+    <pre><code>git clone https://github.com/DropTrash/DropTrash.git</code></pre>
   </li>
 
   <li><strong>Abra os arquivos no editor / Open the files in your code editor</strong>
@@ -57,21 +57,7 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
 
   <li><strong>Execute o jogo / Run the game</strong>
     <p>Rode o arquivo principal do jogo (geralmente chamado <code>main.py</code>) com o seguinte comando: <strong>[pt_br]</strong></p>
-    <p>Run the main game file (usually named <code>main.py</code>) using the command: <strong>[en]</strong></p>
-    <pre><code>python main.py</code></pre>
-  </li>
-
-  <li><strong>Jogue / Play</strong>
-    <p>Agora é só aproveitar o jogo! <strong>[pt_br]</strong></p>
-    <p>Now just enjoy the game! <strong>[en]</strong></p>
-  </li>
-</ol>
-
-
-## 📌 Socket - Informações importantes sobre a aplicação / Socket - Important Information about the Application 📌🔧
-
-<p>Este foi um projeto individual que desenvolvi no ano de 2024, durante o terceiro semestre do curso de Bacharelado em Sistemas de Informação na Faculdade de Computação e Informática (FCI) da Universidade Presbiteriana Mackenzie, como parte da disciplina Comunicação de Dados. <strong> [pt_br] </strong></p>
-<p>This was an individual project I developed in 2024, during the third semester of the Bachelor's degree in Information Systems at the Faculty of Computing and Informatics (FCI) at Mackenzie Presbyterian University, as part of the Data Communication course. <strong> [en] </strong></p>
+    <p>Run the main game file (usually named <code>main.py</code>)
 
 <h2> Integrantes 🔽 </h2>
 <ul>
@@ -83,12 +69,8 @@ The DropTrash project is a game developed using Pygame as part of the Digital Ga
 
 <h2> Aplicação em Funcionamento / Application in Operation ▶️🔧 </h2>
 
-<p>Assista ao vídeo abaixo para ver a aplicação em funcionamento. Não deixe de curtir o vídeo e comentar! <strong> [pt_br] </strong></p>
-<p>Watch the video below to see our application in action. Don't forget to like the video and leave a comment! <strong> [en] </strong></p>
-
-<h2> Entre em Contato / Get in touch 📬🔧 </h2>
-<p>Se você tiver alguma dúvida ou sugestão sobre este projeto, sinta-se à vontade para entrar em contato pelo email <a href="mailto:beatriz_de_camargo@hotmail.com">beatriz_de_camargo@hotmail.com</a>. <strong> [pt_br] </strong></p>
-<p>If you have any questions or suggestions about this project, feel free to contact me via email at <a href="mailto:beatriz_de_camargo@hotmail.com">beatriz_de_camargo@hotmail.com</a>. <strong> [en] </strong></p>
+<p>Assista ao vídeo abaixo para ver a aplicação em funcionamento. <strong> [pt_br] </strong></p>
+<p>Watch the video below to see our application in action. <strong> [en] </strong></p>
 
 ![channels4_banner](https://github.com/user-attachments/assets/1021f93c-13a9-486a-8c5c-80624679bb57)
 

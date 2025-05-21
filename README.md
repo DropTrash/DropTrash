@@ -5,7 +5,7 @@ If you enjoyed the project, leave a ⭐️<strong> [en] </strong>
 <h2> Acesso o Wiki da atividade / Access the activity Wiki 👇 </h2>
 
 Para mais informações sobre o assunto, basta acessar este link: https://github.com/DropTrash/DropTrash/wiki <br>
-For more information on the subject, just click on this link: https://github.com/DropTrash/DropTrash/wiki
+https://drive.google.com/file/d/16WGbp_FnKAdBdMNvdgy0aA-oXq9Ijncq/view?usp=sharing
 
 <h2> Descrição Geral / General Description 🌐 </h2>
 O projeto DropTrash é um jogo desenvolvido em Pygame como parte da disciplina Jogos Digitais, ministrada pelo professor Luiz Carlos Machi Lozano na Universidade Presbiteriana Mackenzie, durante o 4º semestre do curso de Sistemas de Informação. O jogo tem como objetivo principal promover a conscientização ambiental por meio da reciclagem, estimulando o jogador a descartar corretamente os resíduos nas lixeiras correspondentes. Com uma abordagem lúdica e educativa, DropTrash busca unir entretenimento e aprendizado, incentivando hábitos sustentáveis de forma interativa. <strong> [pt_br] </strong> 

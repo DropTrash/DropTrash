@@ -367,8 +367,45 @@ def mikeScenes_Intro_Lvl2(window, main_loop_flag):
         window.blit(current_scene_image, (0, 0))
 
 
+def mikeScenes_Explain_Lvl1_GameOver(window, main_loop_flag):
+    current_scene_image = assets.mike_lvl1_explain_gameover_img
+    if not current_scene_image:
+        print(
+            "Erro: Imagem da cutscene Mike Nível 1 Explain (Game Over) não carregada. Indo para tela de Game Over."
+        )
+        game_state.current_scene_name = "game_over_final"
+        return
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            main_loop_flag[0] = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_d:
+                next_img_for_fade = (
+                    assets.gameOver_bg_img
+                    if assets.gameOver_bg_img
+                    else (
+                        assets.backGroundGaming
+                        if assets.backGroundGaming
+                        else pygame.Surface((1, 1))
+                    )
+                )
+                if current_scene_image and next_img_for_fade:
+                    utils.fade_transition(
+                        window, current_scene_image, next_img_for_fade
+                    )
+                elif next_img_for_fade:
+                    window.blit(next_img_for_fade, (0, 0))
+                game_state.current_scene_name = "game_over_final"
+                return
+    if current_scene_image:
+        window.blit(current_scene_image, (0, 0))
+
+
 def mikeScenes_Explain_Lvl2_GameOver(window, main_loop_flag):
-    current_scene_image = assets.mike_lvl2_explain_img
+    current_scene_image = (
+        assets.mike_lvl2_explain_gameover_img
+    )  
     if not current_scene_image:
         print(
             "Erro: Imagem da cutscene Mike Nível 2 Explain (Game Over) não carregada. Indo para tela de Game Over."
@@ -418,13 +455,11 @@ def gamingScene(window, main_loop_flag):
         game_state.time_remaining = time_limit_for_level - elapsed_seconds
         if game_state.time_remaining <= 0:
             game_state.time_remaining = 0
-            if (
-                game_state.current_scene_name == "gaming"
-            ):  # Só muda de cena se ainda estiver no jogo
+            if game_state.current_scene_name == "gaming":
                 print("Tempo esgotado! Game Over.")
                 game_state.current_scene_name = "game_over_final"
                 pygame.mixer.music.stop()
-                return  # Importante para processar a mudança de cena no loop principal
+                return
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -473,19 +508,15 @@ def gamingScene(window, main_loop_flag):
                                 ):
                                     print("Game Over! (Sem vidas)")
                                     pygame.mixer.music.stop()
-                                    if (
-                                        game_state.current_level == 1
-                                    ):  # Perdeu no Nível 1
+                                    if game_state.current_level == 1:
                                         game_state.current_scene_name = (
-                                            "game_over_final"
+                                            "mike_explain_lvl1_gameover"
                                         )
-                                    elif (
-                                        game_state.current_level == 2
-                                    ):  # Perdeu no Nível 2
+                                    elif game_state.current_level == 2:
                                         game_state.current_scene_name = (
                                             "mike_explain_lvl2_gameover"
                                         )
-                                    return  # Importante para processar a mudança de cena
+                                    return
                             break
                     if not collided_with_any_bin:
                         game_state.dragging_item["rect"].topleft = (
@@ -572,16 +603,15 @@ def gamingScene(window, main_loop_flag):
             if assets.mike_lvl2_intro_img:
                 utils.musicMike()
             game_state.current_scene_name = "maike_intro_lvl2"
-            return  # Importante para processar a mudança de cena
+            return
         elif game_state.current_level == 2:
             print("Nível 2 Concluído! Você zerou o jogo!")
             game_state.current_scene_name = "victory_screen"
-            # Opcional: fade para tela de vitória
             if assets.victory_screen_bg_img and current_bg_for_fade:
                 utils.fade_transition(
                     window, current_bg_for_fade, assets.victory_screen_bg_img
                 )
-            return  # Importante para processar a mudança de cena
+            return
 
 
 def gameOverScene_Final(window, main_loop_flag):
@@ -652,7 +682,9 @@ def victoryScreen(window, main_loop_flag):
         if event.type == pygame.QUIT:
             main_loop_flag[0] = False
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RETURN or event.key == pygame.K_ESCAPE:
+            if (
+                event.key == pygame.K_RETURN or event.key == pygame.K_ESCAPE
+            ):  # ENTER ou ESC para voltar
                 game_state.current_scene_name = "home"
                 game_state.control_mike_scenes = 1
                 game_state.current_level = 1

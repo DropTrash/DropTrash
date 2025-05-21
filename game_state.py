@@ -1,5 +1,5 @@
 current_scene_name = "home"
-control_mike_scenes = 1  # Para a sequência de cenas do Mike Nível 1
+control_mike_scenes = 1  
 
 trash_items = []
 garbage_bins = []

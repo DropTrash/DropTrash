@@ -8,15 +8,14 @@ import game_state
 
 def main():
     pygame.init()
-    # Inicializa o mixer ANTES de qualquer carregamento de som
-    pygame.mixer.init()  # Adicionado para garantir que o mixer esteja pronto
+    pygame.mixer.init()
 
     window = pygame.display.set_mode((settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT))
     pygame.display.set_caption(settings.GAME_CAPTION)
     clock = pygame.time.Clock()
 
-    assets.load_all_assets()  # Carrega todos os assets
-    utils.musicHome()  # Inicia a música da home após o mixer estar pronto
+    assets.load_all_assets()
+    utils.musicHome()
 
     main_loop_running = [True]
 
@@ -28,6 +27,8 @@ def main():
             scenes.mikeScenes_Intro_Lvl1(window, main_loop_running)
         elif current_scene == "maike_intro_lvl2":
             scenes.mikeScenes_Intro_Lvl2(window, main_loop_running)
+        elif current_scene == "mike_explain_lvl1_gameover":  
+            scenes.mikeScenes_Explain_Lvl1_GameOver(window, main_loop_running)
         elif current_scene == "mike_explain_lvl2_gameover":
             scenes.mikeScenes_Explain_Lvl2_GameOver(window, main_loop_running)
         elif current_scene == "gaming":
@@ -36,7 +37,7 @@ def main():
             scenes.gameOverScene_Final(window, main_loop_running)
         elif current_scene == "victory_screen":
             scenes.victoryScreen(window, main_loop_running)
-        else:  # Caso de cena desconhecida, para evitar crash e facilitar debug
+        else:
             print(f"ERRO: Cena desconhecida '{current_scene}'. Voltando para home.")
             game_state.current_scene_name = "home"
 

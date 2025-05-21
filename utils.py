@@ -14,7 +14,7 @@ def musicHome():
 def musicMike():
     try:
         pygame.mixer.music.load(settings.MUSIC_MIKE)
-        pygame.mixer.music.play()  # Toca uma vez
+        pygame.mixer.music.play()
         pygame.mixer.music.set_volume(0.5)
     except pygame.error as e:
         print(f"Erro ao carregar/tocar música do Mike: {e}")
